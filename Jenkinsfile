@@ -10,8 +10,18 @@ pipeline {
             // gradle gitPullAll can update, but Jenkins git plugin not
             // aware the url, so commitNotify will not trigger build.
             // use git plugin to update source so it will trigger build.
+            script {
+              if (isUnix()) {
+                sh "./gradlew --no-daemon getComponent -Pcomponent=example"
+              }
+            }
             dir("moqui/runtime/component/example") {
                 git url: 'https://github.com/moqui/example.git'
+            }
+            script {
+              if (isUnix()) {
+                sh "./gradlew --no-daemon gitPull"
+              }
             }
       }
     }
@@ -20,8 +30,6 @@ pipeline {
       steps{
             script {
               if (isUnix()) {
-                sh "./gradlew --no-daemon getComponent -Pcomponent=example"
-                sh "./gradlew --no-daemon gitPull"
                 sh "./gradlew --no-daemon cleanAll"
                 sh "./gradlew --no-daemon build"
 

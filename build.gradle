@@ -50,10 +50,10 @@ task gitPull {
         }
     }
 }
-task getComponent {
-    dependsOn syncMyaddons
-}
-
-task getComponentSet {
-    dependsOn syncMyaddons
-}
+//task getComponent {
+//    dependsOn syncMyaddons
+//}
+//
+//task getComponentSet {
+//    dependsOn syncMyaddons
+//}
