@@ -16,8 +16,9 @@ env:
 
 script:
   - ./gradlew getComponent -Pcomponent=example
-  - ./gradlew gitPull
+  - ./gradlew gitPull --stack-trace
   - ./gradlew cleanAll
+  - ./gradlew load
   - ./gradlew runtime:component:example:test --info
 
 cache:

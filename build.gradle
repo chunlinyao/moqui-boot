@@ -23,6 +23,10 @@ repositories {
 
 defaultTasks 'build'
 
+def allCleanTasks = getTasksByName('clean', true)
+def allBuildTasks = getTasksByName('build', true)
+def allTestTasks = getTasksByName('test', true)
+
 Node parseComponent(project) { new XmlParser().parse(project.file('component.xml')) }
 
 buildscript {
@@ -50,9 +54,9 @@ task gitPull {
         }
     }
 }
-//task getComponent {
-//    dependsOn syncMyaddons
-//}
+task load {
+   dependsOn allBuildTasks
+}
 //
 //task getComponentSet {
 //    dependsOn syncMyaddons
