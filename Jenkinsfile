@@ -4,17 +4,17 @@ pipeline {
     stage('Preparation') { // for display purposes
       // Get some code from a GitHub repository
       steps {
-            // deleteDir()
-            // git url: 'https://github.com/chunlinyao/moqui-boot.git'
+            deleteDir()
+            git url: 'https://github.com/chunlinyao/moqui-boot.git'
 
-            // gradle gitPullAll can update, but Jenkins git plugin not
-            // aware the url, so commitNotify will not trigger build.
-            // use git plugin to update source so it will trigger build.
             script {
               if (isUnix()) {
                 sh "./gradlew --no-daemon getComponent -Pcomponent=example"
               }
             }
+            // gradle gitPullAll can update, but Jenkins git plugin not
+            // aware the url, so commitNotify will not trigger build.
+            // use git plugin to update source so it will trigger build.
             dir("moqui/runtime/component/example") {
                 git url: 'https://github.com/moqui/example.git'
             }
