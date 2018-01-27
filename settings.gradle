@@ -1,0 +1,32 @@
+
+import org.ajoberstar.grgit.*
+
+buildscript {
+    repositories { jcenter() }
+    dependencies { classpath 'org.ajoberstar:gradle-git:1.7.2' }
+}
+// get framework in initialization phase
+if (!file('moqui').exists()) {
+    logger.info("cloning moqui framework......")
+    Grgit.clone(dir: 'moqui', uri: 'https://github.com/moqui/moqui-framework.git')
+}
+System.setProperty('org.ajoberstar.grgit.auth.session.config.server_host_key', 'ecdsa-sha2-nistp256')
+def includeDirectoryProjects(String relativePath) {
+    File runtimeDir = new File('moqui/runtime')
+    if (!runtimeDir.exists()) return 
+    File compsDir = new File('moqui/runtime/' + relativePath)
+    if (!compsDir.exists()) return
+    return compsDir.listFiles().findAll { it.isDirectory() && it.listFiles().find { it.name == 'build.gradle' } }
+            .each { include ":runtime:${relativePath}:${it.getName()}"; project( ":runtime:${relativePath}:${it.getName()}").projectDir = it } 
+}
+
+rootProject.name = 'moqui-boot'
+include ':moqui'
+include ':moqui-util'
+project(':moqui-util').projectDir = new File(settingsDir, "moqui/moqui-util")
+
+include 'framework'
+project(':framework').projectDir = new File(settingsDir, "moqui/framework")
+
+includeDirectoryProjects('base-component')
+includeDirectoryProjects('component')

@@ -1,0 +1,22 @@
+<addons default-repository="github">
+    <!--
+    Contains known open source Moqui components, those in the GitHub 'moqui' group and others.
+
+    To add or override repository, runtime, and component elements use a "myaddons.xml" file.
+    -->
+    <!--
+    <repository name="office-ssh">
+        <location type="git" url="file:///Users/yaochunlin/work/sennew/runtime/component/${component.'@name'}"/>
+    </repository>
+    -->
+    <!-- Moqui Tool Components -->
+    <component name="moqui-fop" branch="master" group="chunlinyao"/>
+
+    <!-- Release builds:
+        gradle getComponentSet -PcomponentSet=demo -PlocationType=release
+        gradle getComponent -Pcomponent=PopCommerce -PlocationType=release
+        gradle getComponent -Pcomponent=HiveMind -PlocationType=release
+        - these make the source distro for each
+        - to build the demo war: gradle load test addRuntime
+    -->
+</addons>

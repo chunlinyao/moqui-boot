@@ -1,0 +1,26 @@
+language: groovy
+
+sudo: false
+# addons:
+#   apt:
+#     packages:
+#       - oracle-java8-installer
+
+jdk:
+  - oraclejdk8
+
+install: true
+
+env:
+  - TERM=dumb
+
+script:
+  - ./gradlew getComponent -Pcomponent=example
+  - ./gradlew gitPull
+  - ./gradlew cleanAll
+  - ./gradlew runtime:component:example:test --info
+
+cache:
+  directories:
+    - $HOME/.gradle/caches
+    - $HOME/.gradle/wrapper
