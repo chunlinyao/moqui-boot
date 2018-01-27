@@ -4,7 +4,7 @@ pipeline {
     stage('Preparation') { // for display purposes
       // Get some code from a GitHub repository
       steps {
-            deleteDir()
+            // deleteDir()
             git url: 'https://github.com/chunlinyao/moqui-boot.git'
 
             script {
