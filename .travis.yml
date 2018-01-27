@@ -16,7 +16,7 @@ env:
 
 script:
   - git config --replace-all remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
-  - git fetch --unshallow
+  - git fetch --unshallow || true
   - git checkout master
   - if [ "${TRAVIS_PULL_REQUEST}" != "false" ];
     then git checkout ${TRAVIS_PULL_REQUEST_BRANCH};
