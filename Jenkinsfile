@@ -5,7 +5,7 @@ pipeline {
       // Get some code from a GitHub repository
       steps {
             // deleteDir()
-            git url: 'https://github.com/chunlinyao/moqui-boot.git'
+            // git url: 'https://github.com/chunlinyao/moqui-boot.git'
 
             // gradle gitPullAll can update, but Jenkins git plugin not
             // aware the url, so commitNotify will not trigger build.
