@@ -53,8 +53,6 @@ pipeline {
   }
   post {
     always {
-      echo currentBuild.getPreviousBuild().result
-      echo currentBuild.result
       script {
         // current is null means still no error
         if (currentBuild.getResult() != null || (currentBuild.getPreviousBuild() &&
